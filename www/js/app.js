@@ -80,15 +80,6 @@ $(document).on("ready", function(){
 	    gatewayAddress = gatewayAddressSetting;
 	}
 	$('#gatewayAddress').val(gatewayAddress);
-	if (typeof cordova != 'undefined') {
-		alert("cordova");
-	} else if (typeof ZeroConf != 'undefined') {
-		alert("ZeroConf");
-	} else if (typeof zeroconf != 'undefined') {
-		alert("zeroconf");
-	} else {
-		alert("zeroconf undefined");
-	}
 
 	$.ajax({
         url: 'http://' + gatewayAddress + '/api/device',
@@ -175,6 +166,35 @@ $(document).on('swiperight', '#black', function(event){
 	$.mobile.changePage( "#home", { transition: "slide", changeHash: true });
 	$('.ui-page-active').css("background-color", "#ffffff");
 });
+
+var app = {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
+    //
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+    	if (typeof cordova != 'undefined') {
+			alert("cordova");
+		} else if (typeof ZeroConf != 'undefined') {
+			alert("ZeroConf");
+		} else if (typeof zeroconf != 'undefined') {
+			alert("zeroconf");
+		} else {
+			alert("zeroconf undefined");
+		}
+    }
+};
 
 var gatewayAddress = "192.168.178.174";
 
