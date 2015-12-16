@@ -80,6 +80,15 @@ $(document).on("ready", function(){
 	    gatewayAddress = gatewayAddressSetting;
 	}
 	$('#gatewayAddress').val(gatewayAddress);
+	if (typeof cordova != 'undefined') {
+		alert("cordova");
+	} else if (typeof ZeroConf != 'undefined') {
+		alert("ZeroConf");
+	} else if (typeof zeroconf != 'undefined') {
+		alert("zeroconf");
+	} else {
+		alert("zeroconf undefined");
+	}
 
 	$.ajax({
         url: 'http://' + gatewayAddress + '/api/device',
