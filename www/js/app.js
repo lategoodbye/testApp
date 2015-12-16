@@ -184,15 +184,26 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+    	var discovery = null;
+    	
     	if (typeof ZeroConf != 'undefined') {
-			alert("ZeroConf");
+    		discovery = ZeroConf;
 		} else if (typeof zeroconf != 'undefined') {
-			alert("zeroconf");
+			discovery = zeroconf;
 		} else if (typeof cordova != 'undefined') {
-			alert("cordova");
+			discovery = cordova.plugins.zeroconf;
 		} else {
 			alert("zeroconf undefined");
+			return;
 		}
+		
+		discovery.watch('_enocean-gw._tcp', function(result) {
+    		if (result.action == 'added') {
+    			alert('service added' + JSON.stringify(result.service));
+    		} else {
+        		alert('service removed');
+    		}
+		});
     }
 };
 
