@@ -190,10 +190,12 @@ var app = {
     		discovery = ZeroConf;
 		} else if (typeof zeroconf != 'undefined') {
 			discovery = zeroconf;
-		} else if (typeof cordova != 'undefined') {
+		} else if ((typeof cordova != 'undefined') &&
+				   (typeof cordova.plugins != 'undefined') &&
+				   (typeof cordova.plugins.zeroconf != 'undefined')) {
 			discovery = cordova.plugins.zeroconf;
 		} else {
-			alert("zeroconf undefined");
+			alert("zeroconf undefined" + JSON.stringify(cordova));
 			return;
 		}
 		
