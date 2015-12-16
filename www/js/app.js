@@ -186,6 +186,8 @@ var app = {
     onDeviceReady: function() {
     	var discovery = null;
     	
+    	alert("1");
+    	
     	if (typeof ZeroConf != 'undefined') {
     		discovery = ZeroConf;
 		} else if (typeof zeroconf != 'undefined') {
@@ -199,6 +201,8 @@ var app = {
 			return;
 		}
 		
+		alert("2");
+		
 		discovery.watch('_enocean-gw._tcp', function(result) {
     		if (result.action == 'added') {
     			alert('service added' + JSON.stringify(result.service));
@@ -206,6 +210,8 @@ var app = {
         		alert('service removed');
     		}
 		});
+		
+		alert("3");
     }
 };
 
