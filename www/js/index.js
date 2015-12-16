@@ -33,6 +33,15 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+    	if (typeof cordova != 'undefined') {
+			alert("cordova");
+		} else if (typeof ZeroConf != 'undefined') {
+			alert("ZeroConf");
+		} else if (typeof zeroconf != 'undefined') {
+			alert("zeroconf");
+		} else {
+			alert("zeroconf undefined");
+		}
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event

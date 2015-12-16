@@ -27,5 +27,5 @@
     <gap:plugin name="org.apache.cordova.device-orientation" source="npm" />
     <icon src="icon.png" />
     <access origin="*" />
-    
+    <plugin name="cordova-plugin-zeroconf" spec="~1.0.1" />
 </widget>
