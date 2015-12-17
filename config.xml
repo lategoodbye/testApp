@@ -53,7 +53,7 @@
     <gap:splash gap:platform="winphone" src="www/res/screen/windows-phone/screen-portrait.jpg" />
     <access origin="*" />
     <plugin name="cordova-plugin-whitelist" version="1" />
-    <plugin name="cordova-zeroconf-plugin" />
+    <plugin name="cordova-plugin-zeroconf" spec="~1.0.1" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
