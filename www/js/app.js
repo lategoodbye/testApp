@@ -188,12 +188,15 @@ var app = {
     	
     	if (typeof ZeroConf != 'undefined') {
     		discovery = ZeroConf;
+    		alert("ZeroConf");
 		} else if (typeof zeroconf != 'undefined') {
 			discovery = zeroconf;
+			alert("zeroconf");
 		} else if ((typeof cordova != 'undefined') &&
 				   (typeof cordova.plugins != 'undefined') &&
 				   (typeof cordova.plugins.zeroconf != 'undefined')) {
 			discovery = cordova.plugins.zeroconf;
+			alert("cordova.plugins.zeroconf");
 		} else {
 			alert("zeroconf undefined" + JSON.stringify(cordova));
 			return;
@@ -214,8 +217,6 @@ var app = {
         		alert('service removed');
     		}
 		});
-		
-		alert("3");
     }
 };
 
