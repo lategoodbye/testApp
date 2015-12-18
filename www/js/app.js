@@ -8,6 +8,27 @@ var entityMap = {
     "'": '&#39;',
     "/": '&#x2F;'
   };
+  
+var gatewayState = 0;
+
+function setGatewayState(state) {
+	if (state == gatewayState)
+		return;
+
+	switch(state) {
+		case 0:
+			$('#duckbill-state').attr('src', 'img/duckbill_red.gif');
+			break;
+		case 1:
+			$('#duckbill-state').attr('src', 'img/duckbill_yellow.gif');
+			break;
+		case 2:
+			$('#duckbill-state').attr('src', 'img/duckbill_green.gif');
+			break;
+	}
+	
+	gatewayState = state;
+}
 
 function escapeHtml(string) {
   return String(string).replace(/[&<>"'\/]/g, function (s) {
@@ -33,7 +54,38 @@ function getLastChangeColor(diff) {
 	return "red";
 }
 
+function storeGatewayAddress(address) {
+	if (!address)
+		return;
+		
+	if (address == gatewayAddress)
+		return;
+
+	gatewayAddress = address;
+	localStorage.setItem('gatewayAddress', address);
+	$('#gatewayAddress').val(gatewayAddress);
+	
+	$.ajax({
+        url: 'http://' + gatewayAddress + '/api/device',
+        crossDomain: true,
+        dataType: "json",
+        async: true,
+        success: function (result) {
+            gateways.parseJSON(result);
+            setGatewayState(2);
+        },
+        error: function (request,status,error) {
+            setGatewayState(0);
+        }
+    });
+}
+
 function contactWorker() {
+	if (!gatewayAddress) {
+		setTimeout(contactWorker, 3000);
+		return;
+	}
+
 	$.ajax({
 		url: 'http://' + gatewayAddress + '/api/window-contacts',
 		crossDomain: true,
@@ -41,9 +93,10 @@ function contactWorker() {
 		async: true,
 		success: function (result) {
             contacts.parseJSON(result);
+            setGatewayState(2);
         },
         error: function (request,status,error) {
-            alert(status + ' - ' + error);
+            setGatewayState(0);
         },
 		complete: function() {
 			// Schedule the next request when the current one's complete
@@ -68,8 +121,7 @@ function getContactLabelById(id) {
 
 var saveSettings = function() {
 	var address = $('#gatewayAddress').val();
-	localStorage.setItem('gatewayAddress', address);
-	gatewayAddress = address;
+	storeGatewayAddress(address);
 	window.history.back();
 };
 
@@ -77,22 +129,8 @@ $(document).on("ready", function(){
 	$('#saveSettings').on('click', saveSettings);
 	var gatewayAddressSetting = localStorage.getItem('gatewayAddress');
 	if (gatewayAddressSetting) {
-	    gatewayAddress = gatewayAddressSetting;
+	    // gatewayAddress = gatewayAddressSetting;
 	}
-	$('#gatewayAddress').val(gatewayAddress);
-
-	$.ajax({
-        url: 'http://' + gatewayAddress + '/api/device',
-        crossDomain: true,
-        dataType: "json",
-        async: true,
-        success: function (result) {
-            gateways.parseJSON(result);
-        },
-        error: function (request,status,error) {
-            alert(status + ' - ' + error);
-        }
-    });
     
     contactWorker();
 });
@@ -109,7 +147,7 @@ $(document).on('click', '#saveLabel', function(){
 		dataType: "json",
 		async: true, 
         error: function (request,status,error) {
-            alert(status + ' - ' + error);
+            setGatewayState(0);
         }
 	});
 });
@@ -138,7 +176,7 @@ $(document).on('swipeleft', '#contact-list li a', function(event){
 		dataType: "json",
 		async: true, 
         error: function (request,status,error) {
-            alert(status + ' - ' + error);
+            setGatewayState(0);
         }
 	});
 });
@@ -152,7 +190,7 @@ $(document).on('swipeleft', '#black-list li a', function(event){
 		crossDomain: true,
 		async: true, 
         error: function (request,status,error) {
-            alert(status + ' - ' + error);
+            setGatewayState(0);
         }
 	});
 });
@@ -206,7 +244,7 @@ var app = {
     		if (result.action == 'added') {
     			if (result.service.application &&
     				result.service.addresses) {
-    				alert('Enocean gateway found: ' + result.service.addresses[0]);
+    				storeGatewayAddress(result.service.addresses[0]);
     			}
     		} else {
         		alert('Enocean gateway removed');
@@ -215,7 +253,9 @@ var app = {
     }
 };
 
-var gatewayAddress = "192.168.178.174";
+// var gatewayAddress = "192.168.178.174";
+
+var gatewayAddress = null;
 
 var gatewayInfo = {
 	mac_address : null,
