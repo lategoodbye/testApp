@@ -202,35 +202,14 @@ var app = {
 			return;
 		}
 		
-		discovery.watch('_enocean-gw._tcp', function(result) {
-    		if (result.action == 'added') {
-    			alert('1 service added' + JSON.stringify(result.service));
-    		} else {
-        		alert('1 service removed');
-    		}
-		});
-		
-		discovery.watch('_enocean-gw._tcp.', function(result) {
-    		if (result.action == 'added') {
-    			alert('2 service added' + JSON.stringify(result.service));
-    		} else {
-        		alert('2 service removed');
-    		}
-		});
-		
 		discovery.watch('_enocean-gw._tcp.local.', function(result) {
     		if (result.action == 'added') {
-    			alert('3 service added' + JSON.stringify(result.service));
+    			if (result.service.application &&
+    				result.service.addresses) {
+    				alert('Enocean gateway found: ' + result.service.addresses[0]);
+    			}
     		} else {
-        		alert('3 service removed');
-    		}
-		});
-		
-		discovery.watch('_http._tcp.local.', function(result) {
-    		if (result.action == 'added') {
-    			alert('4 service added' + JSON.stringify(result.service));
-    		} else {
-        		alert('4 service removed');
+        		alert('Enocean gateway removed');
     		}
 		});
     }
