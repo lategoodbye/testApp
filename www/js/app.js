@@ -79,6 +79,8 @@ function storeGatewayAddress(address) {
         }
     });
 
+    contactWorker();
+
     alert('Enocean gateway found: ' + address);
 }
 
@@ -133,8 +135,6 @@ $(document).on("ready", function(){
 	if (gatewayAddressSetting) {
 	    // gatewayAddress = gatewayAddressSetting;
 	}
-    
-    contactWorker();
 });
 
 $(document).on('click', '#saveLabel', function(){
