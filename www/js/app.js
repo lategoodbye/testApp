@@ -204,17 +204,33 @@ var app = {
 		
 		discovery.watch('_enocean-gw._tcp', function(result) {
     		if (result.action == 'added') {
-    			alert('service added' + JSON.stringify(result.service));
+    			alert('1 service added' + JSON.stringify(result.service));
     		} else {
-        		alert('service removed');
+        		alert('1 service removed');
+    		}
+		});
+		
+		discovery.watch('_enocean-gw._tcp.', function(result) {
+    		if (result.action == 'added') {
+    			alert('2 service added' + JSON.stringify(result.service));
+    		} else {
+        		alert('2 service removed');
+    		}
+		});
+		
+		discovery.watch('_enocean-gw._tcp.local.', function(result) {
+    		if (result.action == 'added') {
+    			alert('3 service added' + JSON.stringify(result.service));
+    		} else {
+        		alert('3 service removed');
     		}
 		});
 		
 		discovery.watch('_http._tcp.local.', function(result) {
     		if (result.action == 'added') {
-    			alert('service added' + JSON.stringify(result.service));
+    			alert('4 service added' + JSON.stringify(result.service));
     		} else {
-        		alert('service removed');
+        		alert('4 service removed');
     		}
 		});
     }
