@@ -78,6 +78,8 @@ function storeGatewayAddress(address) {
             setGatewayState(0);
         }
     });
+
+    alert('Enocean gateway found: ' + address);
 }
 
 function contactWorker() {
@@ -226,17 +228,17 @@ var app = {
     	
     	if (typeof ZeroConf != 'undefined') {
     		discovery = ZeroConf;
-    		alert("ZeroConf");
+    		// alert("ZeroConf");
 		} else if (typeof zeroconf != 'undefined') {
 			discovery = zeroconf;
-			alert("zeroconf");
+			// alert("zeroconf");
 		} else if ((typeof cordova != 'undefined') &&
 				   (typeof cordova.plugins != 'undefined') &&
 				   (typeof cordova.plugins.zeroconf != 'undefined')) {
 			discovery = cordova.plugins.zeroconf;
-			alert("cordova.plugins.zeroconf");
+			// alert("cordova.plugins.zeroconf");
 		} else {
-			alert("zeroconf undefined" + JSON.stringify(cordova));
+			alert("No zeroconf plugin found");
 			return;
 		}
 		
