@@ -159,7 +159,7 @@ $(document).on('click', '#gateway-list li a', function(){
     $.mobile.changePage( "#contacts", { transition: "slide", changeHash: true });
 });
 
-$(document).on('click', '#contact-list li a', function(){
+$(document).on('taphold', '#contact-list li a', function(){
     contactId = $(this).attr('data-id');
     $('#contactLabel').val(getContactLabelById(contactId));
 	$.mobile.changePage( "#labelDialog", { transition: "pop" });
