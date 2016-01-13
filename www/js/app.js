@@ -166,7 +166,8 @@ $(document).on('taphold', '#contact-list li a', function(){
 });
 
 $(document).on('pageshow', '#labelDialog', function(){
-	$("input:text:visible:first").focus();
+	$('#contactLabel').click(function(e){ $(this).focus(); });
+	$('#contactLabel').trigger('click');
 });
 
 $(document).on('swipeleft', '#contact-list li a', function(event){
