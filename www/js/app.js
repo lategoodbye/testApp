@@ -17,13 +17,13 @@ function setGatewayState(state) {
 
 	switch(state) {
 		case 0:
-			$('#duckbill-state').attr('src', 'img/duckbill_red.gif');
+			$('#duckbill-state').attr('src', 'img/warning.gif');
 			break;
 		case 1:
-			$('#duckbill-state').attr('src', 'img/duckbill_yellow.gif');
+			$('#duckbill-state').attr('src', 'img/duckbill.gif');
 			break;
 		case 2:
-			$('#duckbill-state').attr('src', 'img/duckbill_green.gif');
+			$('#duckbill-state').attr('src', 'img/duckbill.gif');
 			break;
 	}
 	
