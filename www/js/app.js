@@ -165,6 +165,10 @@ $(document).on('click', '#contact-list li a', function(){
 	$.mobile.changePage( "#labelDialog", { transition: "pop" });
 });
 
+$(document).on('pageshow', '#labelDialog', function(){
+	$("input:text:visible:first").focus();
+});
+
 $(document).on('swipeleft', '#contact-list li a', function(event){
 	$(this).hide();
 	key = $(this).attr('data-id');
