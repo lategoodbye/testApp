@@ -80,8 +80,6 @@ function storeGatewayAddress(address) {
     });
 
     contactWorker();
-
-    alert('Enocean gateway found: ' + address);
 }
 
 function contactWorker() {
