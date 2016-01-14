@@ -17,7 +17,7 @@ function setGatewayState(state) {
 
 	switch(state) {
 		case 0:
-			$('#duckbill-state').attr('src', 'img/warning.gif');
+			$('#duckbill-state').attr('src', 'img/warning.png');
 			break;
 		case 1:
 			$('#duckbill-state').attr('src', 'img/duckbill.gif');
