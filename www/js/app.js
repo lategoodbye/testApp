@@ -137,6 +137,10 @@ $(document).on("ready", function(){
 
 $(document).on('click', '#saveLabel', function(){
 	var label = $('#contactLabel').val();
+
+	if (label.length == 0)
+		return false;
+
 	body = JSON.stringify({ 'label': label });
 	$.ajax({
 		type: "PUT",
