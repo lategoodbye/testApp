@@ -163,6 +163,7 @@ $(document).on('click', '#gateway-list li a', function(){
 
 $(document).on('taphold', '#contact-list li a', function(){
     contactId = $(this).attr('data-id');
+    $('#contactId').html(contactId);
     $('#contactLabel').val(getContactLabelById(contactId));
 	$.mobile.changePage( "#labelDialog", { transition: "pop" });
 });
