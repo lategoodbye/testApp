@@ -45,10 +45,10 @@ function getMinuteDiff(lastChange) {
 
 function getLastChangeColor(diff) {
 
-	if (diff < 15)
+	if (diff < 20)
 		return "green";
 		
-	if (diff < 30)
+	if (diff < 35)
 		return "yellow";
 
 	return "red";
