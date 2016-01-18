@@ -279,8 +279,6 @@ var app = {
     }
 };
 
-// var gatewayAddress = "192.168.178.174";
-
 var gatewayAddress = null;
 
 var gatewayInfo = {
