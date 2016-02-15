@@ -266,14 +266,23 @@ var app = {
 			return;
 		}
 		
+		discovery.watch('_http._tcp.local.', function(result) {
+		    alert("_http._tcp.local. " + result.service);
+    		if (result.action == 'added') {
+    			if (result.service.application &&
+    				result.service.addresses) {
+    				alert("_http._tcp.local." + result.service);
+    			}
+    		}
+		});
+		
 		discovery.watch('_enocean-gw._tcp.local.', function(result) {
+		    alert("_enocean-gw._tcp.local. " + result.service);
     		if (result.action == 'added') {
     			if (result.service.application &&
     				result.service.addresses) {
     				storeGatewayAddress(result.service.addresses[0]);
     			}
-    		} else {
-        		alert('Enocean gateway removed');
     		}
 		});
     }
