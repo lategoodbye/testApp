@@ -99,7 +99,7 @@ function storeGatewayAddress(address) {
 
 function contactWorker() {
 	if (!gatewayAddress) {
-		setTimeout(contactWorker, 500);
+		setTimeout(contactWorker, 1000);
 		return;
 	}
 
@@ -117,7 +117,7 @@ function contactWorker() {
         },
 		complete: function() {
 			// Schedule the next request when the current one's complete
-			setTimeout(contactWorker, 500);
+			setTimeout(contactWorker, 1000);
     	}
 	});
 }
